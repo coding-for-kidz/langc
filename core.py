@@ -11,35 +11,32 @@ def get_percents(to_get):
     return to_return
 
 
-def get_all():
-    all_files = os.popen("cd ..&&tree /A /F")
-    f = open("all.txt", "w")
-    f.write(all_files.read())
-    f.close()
+def get_all(ignore=None):
+    if ignore is None:
+        ignore = []
+    all_directories = os.walk("..")
+    all_files_list = []
+    for directory in all_directories:
+        ignore_item = False
+        path_list = directory[0].split("\\")
+        print(path_list)
+        for item in ignore:
+            if item in path_list:
+                ignore_item = True
+        if not ignore_item:
+            for file in directory[2]:
+                all_files_list.append(file)
+    return all_files_list
 
 
 def find_langs():
-    langs = {"python": 0, "html": 0, "css": 0, "js": 0}
-    f = (open("all.txt", "r").read()).split("\n")
-    venv_ignore = False
-    node_ignore = False
-    for item in f:
-        if not venv_ignore:
-            try:
-                x = item.split(".")[1]
-            except IndexError:
-                x = item
-            if (x in langs.keys()) or (x == "py"):
-                if x == "py":
-                    langs["python"] += 1
-                else:
-                    langs[x] += 1
-        if "venv" in item:
-            venv_ignore = True
-        if venv_ignore and ("|" in item):
-            venv_ignore = False
-        if "node_modules" in item:
-            node_ignore = True
-        if node_ignore and ("+---font" == item):
-            node_ignore = False
+    langs = {}
+    all_files = get_all(["venv", "node_modules", ".git"])
+    for file in all_files:
+        ending = file.split(".")
+        ending = ending[len(ending) - 1]
+        if ending in langs:
+            langs[ending] += 1
+        else:
+            langs[ending] = 1
     return langs
