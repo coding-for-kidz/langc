@@ -1,0 +1,1 @@
+D:\Documents\Programming\coding-for-kidz\langc\langc\target\release\langc.exe: D:\Documents\Programming\coding-for-kidz\langc\langc\src\lib.rs D:\Documents\Programming\coding-for-kidz\langc\langc\src\main.rs
