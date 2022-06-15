@@ -12,16 +12,12 @@ env:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: [ubuntu-latest, windows-latest, macos-latest]
 
     steps:
     - uses: actions/checkout@v3
-    - name: Switch Directories
-      run: cd langcinternal
     - name: Build
-      run: cargo build --release
-    - name: Go back to main dir
-      run: cd ..
+      run: cd langcinternal && cargo build --release
     - name: Archive production artifacts
       uses: actions/upload-artifact@v3
       with:
