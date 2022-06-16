@@ -28,4 +28,4 @@ jobs:
         name: build
         path: |
           build
-            /langcinternal/target/
+            /langcinternal/target/*
