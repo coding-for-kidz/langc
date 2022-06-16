@@ -25,5 +25,5 @@ jobs:
     - name: Archive production artifacts
       uses: actions/upload-artifact@v3
       with:
-        name: build-${{ env.GITHUB_RUN_ID }}
+        name: build-$env:RUNNER_OS
         path: langcinternal/target/
