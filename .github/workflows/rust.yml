@@ -26,6 +26,4 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: build
-        path: |
-          build
-            /langcinternal/target/*
+        path: /langcinternal/target/*
