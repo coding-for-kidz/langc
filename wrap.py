@@ -1,15 +1,17 @@
 """
 This file outputs a human-readable graph
 """
-import matplotlib.pyplot as plt
 import os
 import time
+
+import matplotlib.pyplot as plt
+
 
 def plot():
     """
     This will plot the data
     """
-    stream = os.popen('%cd%/internalwindows/langc.exe')
+    stream = os.popen("%cd%/internalwindows/langc.exe")
     t1 = time.time()
     output = stream.read()
     t2 = time.time()
