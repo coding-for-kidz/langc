@@ -19,7 +19,7 @@ pub fn get_percents(to_get: &HashMap<String, i32>) -> HashMap<&str, f32> {
 }
 
 
-pub fn should_ignore(ignore_dirs: &[String], path_str: &str) -> bool {
+fn should_ignore(ignore_dirs: &[String], path_str: &str) -> bool {
     debug!("should_ignore");
     let md = metadata(path_str).unwrap();
     if md.is_dir() {
@@ -35,7 +35,7 @@ pub fn should_ignore(ignore_dirs: &[String], path_str: &str) -> bool {
     return false;
 }
 
-pub fn get_all(ignore: Vec<String>, ignore_file_ext: Vec<String>) -> Vec<String> {
+fn get_all(ignore: Vec<String>, ignore_file_ext: Vec<String>) -> Vec<String> {
     debug!("get_all");
     let mut all_files_list: Vec<String> = Vec::new();
     for directory in WalkDir::new("..").into_iter().filter_map(|e| e.ok()) {
@@ -74,7 +74,7 @@ pub fn find_langs() -> HashMap<String, i32> {
                                ".txt".to_string(), ".json".to_string(), ".conf".to_string(),
                                ".xml".to_string(), ".ini".to_string(), ".types".to_string(),
                                ".yml".to_string(), ".in".to_string(), "Makefile".to_string(),
-                               ".lock".to_string(), ".toml".to_string()];
+                               ".lock".to_string(), ".toml".to_string(), ".log".to_string()];
     let all_files = get_all(ignore, ignore_file_ext);
     for file in all_files {
         let mut dotsplit: Vec<&str> = file.split(".").collect();

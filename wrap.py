@@ -2,7 +2,7 @@
 This file outputs a human-readable graph
 """
 import os
-import time
+import platform
 
 import matplotlib.pyplot as plt
 
@@ -11,11 +11,14 @@ def plot():
     """
     This will plot the data
     """
-    stream = os.popen("%cd%/internalwindows/langc.exe")
-    t1 = time.time()
+    stream = ""
+    if platform.system() == "Windows":
+        stream = os.popen("%cd%/internalwindows/langc.exe")
+    elif platform.system() == "Linux":
+        stream = os.popen("./internallinux/langc")
+    elif platform.system() == "Darwin":
+        pass
     output = stream.read()
-    t2 = time.time()
-    print(t2 - t1)
     parse = output.split("\n\n")
     values = parse[0].split("\n")
     labels = parse[1].split("\n")
